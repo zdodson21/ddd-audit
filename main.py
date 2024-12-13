@@ -1,29 +1,43 @@
 import os
 
+class colors:
+    RED='\033[91m'
+    GREEN='\033[92m'
+    YELLOW='\033[93m'
+    ORANGE='\033[94m'
+    BLUE='\033[94m'
+    MAGENTA='\033[95m'
+    CYAN='\033[96m'
+    GRAY='\033[90m'
+    RESET='\033[0m'
+
 # ! Developer Mode
 developerModeEnabled = True #TODO Change to false when done
 
 def developer_mode(message):
-  if developerModeEnabled:
-    print(f"Developer Mode: {message}")
+    if developerModeEnabled:
+        print(f"{colors.YELLOW}Developer Mode: {colors.GRAY}{message}")
 
 developer_mode("Activated")
 
 # ! Main code
-# TODO find .dddignore file
-# TODO for each loop through .dddignore, adding to ignore list
+pwd = os.getcwd()
+developer_mode(f"Script called from: {colors.BLUE}{pwd}")
+
 ddd_ignore = []
 with open(".dddignore", "r") as file:
-  for line in file:
-    ddd_ignore.append(line.strip())
+    for line in file:
+        ddd_ignore.append(line.strip("/\n"))
+
 developer_mode(ddd_ignore)
 
-pwd = os.getcwd()
-developer_mode(f"Script called from: {pwd}")
+
 # TODO save list of all JS files to an array 
-files = []
+component_files = []
 # for each loop to go through each file in the directory, and append it to the array
 # for each loop needs to go through folders as well
+# developer_mode(files) when it goes through files
+# for loop again to go through files and if it matches a file in the ddd_ignore array, remove it from files
 
 
 
