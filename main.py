@@ -28,7 +28,10 @@ ddd_ignore = []
 try:
     with open(".dddignore", "r") as file:
         for line in file:
-            ddd_ignore.append(line.strip("/\n"))
+            if not line.startswith("#") and line.strip():
+                ddd_ignore.append(line.strip("/\n"))
+            else:
+                pass
 except FileNotFoundError:
     pass
 
