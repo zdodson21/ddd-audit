@@ -1,23 +1,23 @@
-#!/bin/bash
-# echo "Running Test";
-# echo $OSTYPE;
 cd test-element;
 # pwd;
-case "$OSTYPE" in
-  linux*) 
-    echo "Linux";
+
+BLUE='\033[0;34m'
+NC='\033[0m'
+case $(uname -s) in
+  "Linux"*) 
+    echo "${BLUE}Running Linux Test...${NC}";
     python3 ../main.py;
   ;;
-  darwin*)
-    echo "Mac";
+  "Darwin"*)
+    echo "${BLUE}Running macOS Test...${NC}";
     python3 ../main.py;
   ;;
-  msys*)
-    echo "Windows";
+  "CYGWIN_NT-*" | "MINGW64_NT-*" | "MSYS_NT-10.0"*)
+    echo "${BLUE}Running Windows Test...${NC}";
     py ../main.py;
   ;;
   *)
-    echo "Unknown";
+    echo "${BLUE}Unknown Operating System. Aborting.${NC}";
     exit 1;
   ;;
 esac
