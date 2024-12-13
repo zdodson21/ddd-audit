@@ -24,6 +24,7 @@ developer_mode("Activated")
 pwd = os.getcwd()
 developer_mode(f"Script called from: {colors.BLUE}{pwd}")
 
+# Get list of files to ignore
 ddd_ignore = []
 try:
     with open(".dddignore", "r") as file:
@@ -37,21 +38,24 @@ except FileNotFoundError:
 
 developer_mode(f"Ignored files: {ddd_ignore}")
 
-
-# TODO save list of all JS files to an array 
+# Get list of files to audit
 component_files = []
-# for each loop to go through each file in the directory, and append it to the array
-# for each loop needs to go through folders as well
-# developer_mode(files) when it goes through files
-# for loop again to go through files and if it matches a file in the ddd_ignore array, remove it from files
+for file in os.listdir(pwd):
+    if os.path.isdir(file) and file != "node_modules" and file not in ddd_ignore:
+        for sub_file in os.listdir(file):
+            if sub_file.endswith(".js") and sub_file not in ddd_ignore:
+                component_files.append(sub_file)
 
+    if file.endswith(".js") and file not in ddd_ignore:
+        component_files.append(file)
 
+developer_mode(f"Files to audit: {component_files}")
 
+# Start auditing
+for file in component_files:
+    developer_mode(f"{colors.GREEN}Auditing {file}")
+    # TODO Audit file
 
-
-
-
-# TODO read the files
 # TODO find where the CSS is in the files
 # TODO go through each CSS property to discover if it needs to be changed to utilize DDD
 # TODO Print the results in the terminal with the line number, what property needs to be changed, and recommendations to change it to
