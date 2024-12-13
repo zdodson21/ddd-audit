@@ -1,5 +1,5 @@
+# If you are looking to test on Windows, use the psTest.ps1 (PowerShell) or cmdTest.bat (Command Prompt) file.
 cd test-element;
-# pwd;
 
 BLUE='\033[0;34m'
 NC='\033[0m'
@@ -12,13 +12,8 @@ case $(uname -s) in
     echo "${BLUE}Running macOS Test...${NC}";
     python3 ../main.py;
   ;;
-  "CYGWIN_NT-*" | "MINGW64_NT-*" | "MSYS_NT-10.0"*)
-    echo "${BLUE}Running Windows Test...${NC}";
-    py ../main.py;
-  ;;
   *)
     echo "${BLUE}Unknown Operating System. Aborting.${NC}";
     exit 1;
   ;;
 esac
-# echo "Test done";

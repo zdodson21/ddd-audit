@@ -1,5 +1,6 @@
 import os
 
+# ! Developer Mode
 class colors:
     RED='\033[91m'
     GREEN='\033[92m'
@@ -11,7 +12,6 @@ class colors:
     GRAY='\033[90m'
     RESET='\033[0m'
 
-# ! Developer Mode
 developerModeEnabled = True #TODO Change to false when done
 
 def developer_mode(message):
@@ -25,11 +25,14 @@ pwd = os.getcwd()
 developer_mode(f"Script called from: {colors.BLUE}{pwd}")
 
 ddd_ignore = []
-with open(".dddignore", "r") as file:
-    for line in file:
-        ddd_ignore.append(line.strip("/\n"))
+try:
+    with open(".dddignore", "r") as file:
+        for line in file:
+            ddd_ignore.append(line.strip("/\n"))
+except FileNotFoundError:
+    pass
 
-developer_mode(ddd_ignore)
+developer_mode(f"Ignored files: {ddd_ignore}")
 
 
 # TODO save list of all JS files to an array 
@@ -50,5 +53,3 @@ component_files = []
 # TODO go through each CSS property to discover if it needs to be changed to utilize DDD
 # TODO Print the results in the terminal with the line number, what property needs to be changed, and recommendations to change it to
   # TODO Ensure anything that cannot be done with DDD is ignored.
-
-
