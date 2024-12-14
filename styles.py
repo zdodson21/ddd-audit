@@ -261,3 +261,23 @@ class ddd:
         "--ddd-icon-3xl", # 84px
         "--ddd-icon-4xl", # 96px
     ]
+
+class css:
+    sides = [
+        "top",
+        "right",
+        "bottom",
+        "left",
+    ]
+
+    # TODO spacing (margin, padding, width, height)
+
+    # TODO border-thickness
+
+    # TODO border-radius
+
+    # TODO shadows
+
+    # TODO gradients
+
+    # TODO sizes

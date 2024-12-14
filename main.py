@@ -1,5 +1,5 @@
 import os
-from styles import ddd
+from styles import *
 
 # ! Developer Mode
 class colors:
