@@ -27,6 +27,8 @@ developer_mode(f"Script called from: {colors.BLUE}{pwd}")
 
 # Get list of files to ignore
 ddd_ignore = []
+
+# Gets .dddignore if exist
 try:
     with open(".dddignore", "r") as file:
         for line in file:
@@ -41,14 +43,21 @@ developer_mode(f"Ignored files: {ddd_ignore}")
 
 # Get list of files to audit
 component_files = []
-for file in os.listdir(pwd):
-    if os.path.isdir(file) and file != "node_modules" and file not in ddd_ignore:
-        for sub_file in os.listdir(file):
-            if sub_file.endswith(".js") and sub_file not in ddd_ignore:
-                component_files.append(sub_file)
+def get_files(directory):
+    developer_mode(f"{colors.MAGENTA}Getting files from {directory}")
+    for file in os.listdir(directory):
+        developer_mode(f"Examining {file}")
+        if os.path.isdir(os.path.join(directory, file)) and file != "node_modules" and file not in ddd_ignore:
+            developer_mode(f"{colors.RED}Recursively getting files from {file}")
+            get_files(os.path.join(directory, file))
 
-    if file.endswith(".js") and file not in ddd_ignore:
-        component_files.append(file)
+        elif file.endswith(".js") and file not in ddd_ignore:
+            developer_mode(f"{colors.GREEN}Adding {file}")
+            component_files.append(file)
+        else:
+            developer_mode(f"{colors.BLUE}Skipping {file}")
+
+get_files(pwd)
 
 developer_mode(f"Files to audit: {component_files}")
 
