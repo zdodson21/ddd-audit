@@ -1,0 +1,8 @@
+# Ignore artifacts:
+build
+coverage
+/test-element
+__pycache__
+/test
+/.idea
+/__pycache__

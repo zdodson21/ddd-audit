@@ -45,12 +45,12 @@ developer_mode(f"Ignored files: {ddd_ignore}")
 component_files = []
 def get_files(directory):
     developer_mode(f"{colors.MAGENTA}Getting files from {directory}")
+    
     for file in os.listdir(directory):
         developer_mode(f"Examining {file}")
         if os.path.isdir(os.path.join(directory, file)) and file != "node_modules" and file not in ddd_ignore:
             developer_mode(f"{colors.RED}Recursively getting files from {file}")
             get_files(os.path.join(directory, file))
-
         elif file.endswith(".js") and file not in ddd_ignore:
             developer_mode(f"{colors.GREEN}Adding {file}")
             component_files.append(file)
