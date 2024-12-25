@@ -23,10 +23,11 @@ def developer_mode(message):
 # ! Variables
 pwd = os.getcwd()
 ddd_ignore = []
-component_files = []
+files_to_audit = []
 ignore_exists = True
 audit_output = []
 
+#! Functions
 def get_dddignore():
     """
     Gets values from .dddignore if it exists
@@ -56,7 +57,7 @@ def get_files(directory):
             get_files(os.path.join(directory, file))
         elif file.endswith(".js") and file not in ddd_ignore:
             developer_mode(f"{colors.GREEN}Adding {file}")
-            component_files.append(file)
+            files_to_audit.append(file)
         else:
             developer_mode(f"{colors.BLUE}Skipping {file}")
 
@@ -65,7 +66,7 @@ def audit_files():
     """
     Audits files, outputs to terminal the line number, what property needs to be changed, and recommendations to change it to
     """
-    for file in component_files:
+    for file in files_to_audit:
         developer_mode(f"{colors.GREEN}Auditing {file}")
     # TODO Audit file
 
@@ -79,7 +80,6 @@ def output_table(auto_audit: bool):
     # TODO REMOVE THIS LINK: https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data
     table = PrettyTable(['Line Number', 'Property', 'Recommended Change'])
     # TODO for loop add values, branch based on auto_audit value, color code everything. 
-
 
 if __name__ == "__main__":
     developer_mode("Activated")
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
     # Gets files to audit
     get_files(pwd)
-    developer_mode(f"Files to audit: {component_files}")
+    developer_mode(f"Files to audit: {files_to_audit}")
 
     # Audits files
     audit_files()
